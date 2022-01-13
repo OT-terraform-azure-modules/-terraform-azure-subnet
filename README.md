@@ -47,7 +47,7 @@ module "vnet" {
 module "subnet_module" {
   source                  = "git::https://github.com/OT-terraform-azure-modules/terraform-azure-subnet.git"
   rg_name                 = module.res_group.resource_group_name
-  vnet_name               = module.Vnet.vnet_name
+  vnet_name               = module.vnet.vnet_name
   subnet_name             = [" ", " "]
   subnet_address_prefixes = [" ", " "]
   delegation_name         = var.delegation_name
