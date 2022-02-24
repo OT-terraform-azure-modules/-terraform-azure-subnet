@@ -26,7 +26,7 @@ Usage
 
 ```hcl
 module "res_group" {
-  source                  = "git::https://github.com/OT-terraform-azure-modules/azure_resource_group.git"
+  source                  = "git::git@gitlab.com:ot-azure/terraform/rg.git"
   resource_group_name     = ""
   resource_group_location = ""
   tag_map = {
@@ -34,8 +34,8 @@ module "res_group" {
   }
 }
 
-module "vnet" {
-  source        = "git::https://github.com/OT-terraform-azure-modules/terraform-azure-virtual-network.git"
+module "Vnet" {
+  source        = "git::https://gitlab.com/ot-azure/terraform/virtual_network.git"
   rg_name       = module.res_group.resource_group_name
   vnet_name     = ""
   vnet_location = module.res_group.resource_group_location
@@ -45,9 +45,9 @@ module "vnet" {
 }
 
 module "subnet_module" {
-  source                  = "git::https://github.com/OT-terraform-azure-modules/terraform-azure-subnet.git"
+  source                  = "git::https://gitlab.com/ot-azure/terraform/subnet.git"
   rg_name                 = module.res_group.resource_group_name
-  vnet_name               = module.vnet.vnet_name
+  vnet_name               = module.Vnet.vnet_name
   subnet_name             = [" ", " "]
   subnet_address_prefixes = [" ", " "]
   delegation_name         = var.delegation_name
