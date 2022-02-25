@@ -11,17 +11,21 @@ variable "subnet_name" {
 variable "delegation_name" {
  description = "The variable for delegation name"
  type        = string
+ default     = ""
 }
 
 variable "delegation_actions" {
  description = "The variable for actions for service delegation"
- type        = list(string)
+ type        = list (string)
+  default    =  [""]
+  
 }
 
 variable "delegation_service_name" {
   description = "The variable for service name for delegation"
   type        = string
-}
+   default     = ""
+} 
 
 variable "vnet_name" {
   description = "The CIDR block for the vnet"
@@ -41,4 +45,6 @@ variable "service_endpoints" {
 variable "create_delegation" { 
   description = "create_delegation"
   type        = bool
+  default     = false
 }
+
