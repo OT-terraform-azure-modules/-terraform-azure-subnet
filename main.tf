@@ -1,7 +1,5 @@
 # Create a subnet within the resource group
 
-# Create a subnet within the resource group
-
 resource "azurerm_subnet" "module_subnet_with_delegation" {
   count                = var.create_delegation == true ? length(var.subnet_address_prefixes) : 0
   name                 = element(var.subnet_name, count.index)
