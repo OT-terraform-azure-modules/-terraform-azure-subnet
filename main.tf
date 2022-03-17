@@ -8,12 +8,18 @@ resource "azurerm_subnet" "module_subnet_with_delegation" {
   address_prefixes     = [var.subnet_address_prefixes[count.index]]
   service_endpoints    = var.service_endpoints
 
-  delegation {
-    name = var.delegation_name
+   dynamic "delegation" {
+    for_each = var.delegation_name
+    content {
+        name = delegation.key
 
-    service_delegation {
-      name    = var.delegation_service_name
-      actions = var.delegation_actions
+  dynamic "service_delegation" {
+    for_each = toset(delegation.value)
+     content {
+          name    = service_delegation.value.name
+          actions = service_delegation.value.actions
+       }  
+     }
     }
   }
 }
@@ -28,4 +34,5 @@ resource "azurerm_subnet" "module_subnet_without_delegation" {
   service_endpoints    = var.service_endpoints
 
 }
+
 
