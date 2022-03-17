@@ -8,20 +8,6 @@ variable "subnet_name" {
   type        = list(string)
 }
 
-variable "delegation_name" {
-  description = "The variable for delegation name"
-  type        = string
-}
-
-variable "delegation_actions" {
-  description = "The variable for actions for service delegation"
-  type        = list(string)
-}
-
-variable "delegation_service_name" {
-  description = "The variable for service name for delegation"
-  type        = string
-}
 
 variable "vnet_name" {
   description = "The CIDR block for the vnet"
@@ -37,3 +23,15 @@ variable "service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet"
   type        = list(string)
 }
+
+variable "create_delegation" { 
+  description = "Creating delegation parameter or not"
+  type        = bool
+  default     = true
+}
+variable "delegation_name" {
+  description = "Delegation configuration for subnet"
+  type        = map(list(any))
+  default     = {}
+}
+
