@@ -12,6 +12,8 @@ Azure Subnet Terraform Module
 
 - This project is a part of open source intiative For Azure Terraform Modules.
 
+- This version of subnet module contains delegation block 
+
 These types of resources are supported:
 
 * [Subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet)
@@ -21,41 +23,6 @@ Terraform versions
 
 Terraform 1.0.8.
 
-Usage
-------
-
-```hcl
-module "res_group" {
-  source                  = "git::git@gitlab.com:ot-azure/terraform/rg.git"
-  resource_group_name     = ""
-  resource_group_location = ""
-  tag_map = {
-    Name = "azure_rg"
-  }
-}
-
-module "Vnet" {
-  source        = "git::https://gitlab.com/ot-azure/terraform/virtual_network.git"
-  rg_name       = module.res_group.resource_group_name
-  vnet_name     = ""
-  vnet_location = module.res_group.resource_group_location
-  address_space = [" "]
-  dns_servers   = [" ", " "]
-
-}
-
-module "subnet_module" {
-  source                  = "git::https://gitlab.com/ot-azure/terraform/subnet.git"
-  rg_name                 = module.res_group.resource_group_name
-  vnet_name               = module.Vnet.vnet_name
-  subnet_name             = [" ", " "]
-  subnet_address_prefixes = [" ", " "]
-  delegation_name         = var.delegation_name
-  service_name            = var.service_name
-  actions                 = var.actions
-  service_endpoints       = var.service_endpoints
-}
-```
 
 Resources
 ------
@@ -81,6 +48,42 @@ Output
 | Name | Description |
 |------|-------------|
 |subnet_id |This variable will give all the details of Subnets |
+
+Usage
+------
+
+```hcl
+module "res_group" {
+  source                  = "OT-terraform-azure-modules/resource-group/azure"
+  resource_group_name     = ""
+  resource_group_location = ""
+  tag_map = {
+    Name = "azure_rg"
+  }
+}
+
+module "Vnet" {
+  source        = "OT-terraform-azure-modules/virtual-network/azure"
+  rg_name       = module.res_group.resource_group_name
+  vnet_name     = ""
+  vnet_location = module.res_group.resource_group_location
+  address_space = [" "]
+  dns_servers   = [" ", " "]
+
+}
+
+module "subnet_module" {
+  source                  = "OT-terraform-azure-modules/subnet/azure"
+  rg_name                 = module.res_group.resource_group_name
+  vnet_name               = module.Vnet.vnet_name
+  subnet_name             = [" ", " "]
+  subnet_address_prefixes = [" ", " "]
+  delegation_name         = var.delegation_name
+  service_name            = var.service_name
+  actions                 = var.actions
+  service_endpoints       = var.service_endpoints
+}
+```
 
 ### Contributors
 |  [![Kritarth Pant][kritarth_avatar]][kritarth_homepage]<br/>[Kritarth Pant][kritarth_homepage] |

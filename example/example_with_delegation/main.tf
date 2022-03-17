@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 module "res_group" {
-  source                  = "git::git@gitlab.com:ot-azure/terraform/rg.git"
+  source                  = "OT-terraform-azure-modules/resource-group/azure"
   resource_group_name     = "test-rg"
   resource_group_location = "West Europe"
   lock_level_value        = ""
@@ -12,7 +12,7 @@ module "res_group" {
   }
 }
 module "vnet" {
-  source                      = "git::git@gitlab.com:ot-azure/terraform/virtual_network.git"
+  source                      = "OT-terraform-azure-modules/virtual-network/azure"
   resource_group_name         = module.res_group.resource_group_name
   resource_group_location     = module.res_group.resource_group_location
   address_space               = ["10.0.0.0/16"]
@@ -24,7 +24,7 @@ module "vnet" {
   }
 }
 module "subnet_module" {
-   source                  = "git::https://github.com/OT-terraform-azure-modules/terraform-azure-subnet.git"
+   source                  = "OT-terraform-azure-modules/subnet/azure"
    resource_group_name     = module.res_group.resource_group_name
    vnet_name               = module.vnet.vnet_name
    subnet_name             = ["opensource1 ", "opensource2 "]
