@@ -54,7 +54,7 @@ Usage
 
 ```hcl
 module "res_group" {
-  source                  = "git::git@gitlab.com:ot-azure/terraform/rg.git"
+  source                  = "OT-terraform-azure-modules/resource-group/azure"
   resource_group_name     = ""
   resource_group_location = ""
   tag_map = {
@@ -63,7 +63,7 @@ module "res_group" {
 }
 
 module "Vnet" {
-  source        = "git::https://gitlab.com/ot-azure/terraform/virtual_network.git"
+  source        = "OT-terraform-azure-modules/virtual-network/azure"
   rg_name       = module.res_group.resource_group_name
   vnet_name     = ""
   vnet_location = module.res_group.resource_group_location
@@ -73,7 +73,7 @@ module "Vnet" {
 }
 
 module "subnet_module" {
-  source                  = "git::https://gitlab.com/ot-azure/terraform/subnet.git"
+  source                  = "OT-terraform-azure-modules/subnet/azure"
   rg_name                 = module.res_group.resource_group_name
   vnet_name               = module.Vnet.vnet_name
   subnet_name             = [" ", " "]
