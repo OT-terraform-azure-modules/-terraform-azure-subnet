@@ -12,6 +12,8 @@ Azure Subnet Terraform Module
 
 - This project is a part of open source intiative For Azure Terraform Modules.
 
+- This version of subnet module contains delegation block 
+
 These types of resources are supported:
 
 * [Subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet)
